@@ -25,4 +25,3 @@ dist-ssr
 
 # Exclude .env but include .env.example
 .env
-!.env.example
