@@ -24,7 +24,7 @@
   font-weight: 600;
 }
 
-.color-form__input {
+.color-form__role-input {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
@@ -39,19 +39,21 @@
   align-items: center;
 }
 
-.color-form__inline-inputs .color-form__input {
-  flex: 1;
-}
-
-.color-form__color {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: none;
-  background: none;
-  padding: 0;
-}
-
 .color-form__button {
   margin: 1rem auto 0;
   display: block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0077cc;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.color-form__button:hover {
+  background-color: #005fa3;
+  transform: scale(1.1);
 }

@@ -8,11 +8,6 @@ import { uid } from "uid";
 function App() {
 
   const [colors, setColors] = useState(initialColors);
-  const defaultFormValues = {
-    role: "some color",
-    hex: "#123456",
-    contrastText: "#ffffff",
-  };
 
   const handleAddColor = (colorToAdd) => {
     setColors((prevColors) => {
@@ -24,7 +19,7 @@ function App() {
 
   return (
     <>
-      <ColorForm onAddColor={handleAddColor} initialFormData={defaultFormValues}/>
+      <ColorForm onAddColor={handleAddColor}/>
 
       {colors.map((color) => {
         return <Color key={color.id} color={color} />;

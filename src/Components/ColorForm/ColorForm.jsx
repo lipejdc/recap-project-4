@@ -1,14 +1,19 @@
 import "./ColorForm.css";
+import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm( { onAddColor, initialFormData }) {
+export default function ColorForm( { onAddColor }) {
   
+    const defaultFormValues = {
+    role: "some color",
+    hex: "#123456",
+    contrastText: "#ffffff",
+  };
   
     function handleSubmitColor(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     onAddColor(data);
-    console.log(data);
   }
 
   return (
@@ -22,9 +27,9 @@ export default function ColorForm( { onAddColor, initialFormData }) {
           <input
             type="text"
             id="role"
-            className="color-form__input"
+            className="color-form__role-input"
             name="role"
-            defaultValue={initialFormData.role}
+            defaultValue={defaultFormValues.role}
           />
         </div>
 
@@ -33,14 +38,7 @@ export default function ColorForm( { onAddColor, initialFormData }) {
             Hex:
           </label>
           <div className="color-form__inline-inputs">
-            <input
-              type="text"
-              id="hex"
-              className="color-form__input"
-              name="hex"
-              defaultValue={initialFormData.hex}
-            />
-            <input type="color" className="color-form__color" />
+            <ColorInput id="hex" defaultValue={defaultFormValues.hex} />
           </div>
         </div>
 
@@ -49,14 +47,10 @@ export default function ColorForm( { onAddColor, initialFormData }) {
             Contrast Text:
           </label>
           <div className="color-form__inline-inputs">
-            <input
-              type="text"
+            <ColorInput
               id="contrastText"
-              className="color-form__input"
-              name="contrastText"
-              defaultValue={initialFormData.contrastText}
+              defaultValue={defaultFormValues.contrastText}
             />
-            <input type="color" className="color-form__color" />
           </div>
         </div>
         <button className="color-form__button">Add Color</button>
