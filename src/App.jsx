@@ -12,12 +12,24 @@ function App() {
     setColors((prevColors) => [{ id: uid(), ...colorToAdd }, ...prevColors]);
   };
 
+  const handleDeleteColor = (idToDelete) => {
+    setColors((prevColors) =>
+      prevColors.filter((color) => color.id !== idToDelete)
+    );
+  };
+
   return (
     <>
       <ColorForm onAddColor={handleAddColor} />
 
       {colors.map((color) => {
-        return <Color key={color.id} color={color} />;
+        return (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={handleDeleteColor}
+          />
+        );
       })}
     </>
   );
