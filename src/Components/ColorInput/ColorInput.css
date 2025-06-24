@@ -1,0 +1,28 @@
+.color-input__text {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+  flex: 1;
+}
+
+.color-input__color {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  box-shadow: 0 0 0 1px #ccc;
+  transition: box-shadow 0.2s ease;
+}
+
+.color-input__color:hover,
+.color-input__color:focus {
+  box-shadow: 0 0 0 2px #007bff;
+  outline: none;
+}
