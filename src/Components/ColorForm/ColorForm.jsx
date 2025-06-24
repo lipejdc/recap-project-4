@@ -1,4 +1,5 @@
 import "./ColorForm.css";
+import Button from "../Button/Button";
 import ColorInput from "../ColorInput/ColorInput";
 
 const defaultFormValues = {
@@ -17,7 +18,6 @@ export default function ColorForm({ onAddColor }) {
 
   return (
     <>
-      <h1 className="color-form__title">Theme Creator</h1>
       <form className="color-form" onSubmit={handleSubmitColor}>
         <div className="color-form__group">
           <label htmlFor="role" className="color-form__label">
@@ -52,7 +52,7 @@ export default function ColorForm({ onAddColor }) {
             />
           </div>
         </div>
-        <button className="color-form__button">Add Color</button>
+        <Button>Add Color</Button>
       </form>
     </>
   );

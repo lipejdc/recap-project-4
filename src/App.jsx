@@ -20,6 +20,7 @@ function App() {
 
   return (
     <>
+    <h1 className="app__title">Theme Creator</h1>
       <ColorForm onAddColor={handleAddColor} />
 
       {colors.length === 0 && <p className="app__empty-message">No colors.. start by adding one!</p>}

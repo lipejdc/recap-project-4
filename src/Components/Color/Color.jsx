@@ -1,13 +1,17 @@
 import "./Color.css";
+import Button from "../Button/Button";
 import { useState } from "react";
 
 export default function Color({ color, onDeleteColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
   const handleDeleteClick = () =>
     confirmDelete ? onDeleteColor(color.id) : setConfirmDelete(true);
 
   const handleCancelClick = () => setConfirmDelete(false);
+
+  // const handleEditClick = () => setIsEditing(true);
 
   return (
     <div
@@ -26,18 +30,30 @@ export default function Color({ color, onDeleteColor }) {
             <span className="color-card__highlight" role="alert">
               Really delete?
             </span>
-            <button
+            <Button
+              variant="cancel"
               onClick={handleCancelClick}
-              aria-label="Cancel delete"
-              className="color-card__cancel-button"
+              ariaLabel={`Cancel delete of color ${color.role}`}
             >
               Cancel
-            </button>
+            </Button>
           </>
         )}
 
-        <button onClick={handleDeleteClick} className="color-card__delete-button">Delete</button>
-        <button className="color-card__edit-button">Edit</button>
+        <Button
+          variant="delete"
+          onClick={handleDeleteClick}
+          ariaLabel={`Delete color ${color.role}`}
+        >
+          Delete
+        </Button>
+        <Button
+          variant="edit"
+          // onClick={handleEditClick}
+          ariaLabel={`Edit color ${color.role}`}
+        >
+          Edit
+        </Button>
       </div>
     </div>
   );
