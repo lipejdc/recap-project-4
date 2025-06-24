@@ -37,6 +37,7 @@ export default function Color({ color, onDeleteColor }) {
         )}
 
         <button onClick={handleDeleteClick} className="color-card__delete-button">Delete</button>
+        <button className="color-card__edit-button">Edit</button>
       </div>
     </div>
   );
