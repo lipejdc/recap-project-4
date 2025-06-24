@@ -22,6 +22,7 @@ function App() {
     <>
       <ColorForm onAddColor={handleAddColor} />
 
+      {colors.length === 0 && <p className="app__empty-message">No colors.. start by adding one!</p>}
       {colors.map((color) => {
         return (
           <Color
