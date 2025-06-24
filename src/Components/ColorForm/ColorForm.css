@@ -1,0 +1,57 @@
+.color-form {
+  max-width: 25rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.1);
+}
+
+.color-form__title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.color-form__group {
+  margin-bottom: 1.5rem;
+}
+
+.color-form__label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.color-form__input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.color-form__inline-inputs {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.color-form__inline-inputs .color-form__input {
+  flex: 1;
+}
+
+.color-form__color {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.color-form__button {
+  margin: 1rem auto 0;
+  display: block;
+}
