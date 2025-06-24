@@ -2,12 +2,8 @@ import { useState } from "react";
 import "./ColorInput.css";
 
 export default function ColorInput({ id, defaultValue }) {
-  
-    const [colorValue, setColorValue] = useState(defaultValue);
-
-  function handleColorChange(event) {
-    setColorValue(event.target.value);
-  }
+  const [colorValue, setColorValue] = useState(defaultValue);
+  const handleColorChange = (event) => setColorValue(event.target.value);
 
   return (
     <>

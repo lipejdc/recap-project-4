@@ -1,15 +1,16 @@
 import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm( { onAddColor }) {
-  
-    const defaultFormValues = {
+const defaultFormValues = {
     role: "some color",
     hex: "#123456",
     contrastText: "#ffffff",
   };
-  
-    function handleSubmitColor(event) {
+
+
+export default function ColorForm({ onAddColor }) {
+
+  const handleSubmitColor = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
