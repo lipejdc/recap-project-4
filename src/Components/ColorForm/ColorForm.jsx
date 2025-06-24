@@ -2,20 +2,18 @@ import "./ColorForm.css";
 import ColorInput from "../ColorInput/ColorInput";
 
 const defaultFormValues = {
-    role: "some color",
-    hex: "#123456",
-    contrastText: "#ffffff",
-  };
-
+  role: "some color",
+  hex: "#123456",
+  contrastText: "#ffffff",
+};
 
 export default function ColorForm({ onAddColor }) {
-
   const handleSubmitColor = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     onAddColor(data);
-  }
+  };
 
   return (
     <>
