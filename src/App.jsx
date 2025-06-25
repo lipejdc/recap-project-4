@@ -18,18 +18,29 @@ function App() {
     );
   };
 
+  const handleEditColor = (updatedColor) => {
+    setColors((prevColors) =>
+      prevColors.map((color) =>
+        color.id === updatedColor.id ? updatedColor : color
+      )
+    );
+  };
+
   return (
     <>
-    <h1 className="app__title">Theme Creator</h1>
+      <h1 className="app__title">Theme Creator</h1>
       <ColorForm onAddColor={handleAddColor} />
 
-      {colors.length === 0 && <p className="app__empty-message">No colors.. start by adding one!</p>}
+      {colors.length === 0 && (
+        <p className="app__empty-message">No colors.. start by adding one!</p>
+      )}
       {colors.map((color) => {
         return (
           <Color
             key={color.id}
             color={color}
             onDeleteColor={handleDeleteColor}
+            onEditColor={handleEditColor}
           />
         );
       })}
