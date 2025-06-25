@@ -2,6 +2,7 @@ import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 import Button from "../Button/Button";
 import { useState } from "react";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -17,7 +18,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
   const handleSave = (updatedColor) => {
     onEditColor({ ...color, ...updatedColor });
     setIsEditing(false);
-  }
+  };
 
   return (
     <div
@@ -27,11 +28,16 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card__highlight">{color.hex}</h3>
+      <div className="color-card__hex-row">
+        <h3 className="color-card__highlight">{color.hex}</h3>
+        <CopyToClipboard text={color.hex} />
+      </div>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
 
-      {isEditing && <ColorForm defaultValues={color} onSave={handleSave} isEditing />}
+      {isEditing && (
+        <ColorForm defaultValues={color} onSave={handleSave} isEditing />
+      )}
 
       <div className="color-card__actions">
         {confirmDelete && (
