@@ -30,7 +30,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
     >
       <div className="color-card__hex-row">
         <h3 className="color-card__highlight">{color.hex}</h3>
-        <CopyToClipboard />
+        <CopyToClipboard text={color.hex} />
       </div>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
