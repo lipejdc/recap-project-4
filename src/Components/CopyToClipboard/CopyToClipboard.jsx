@@ -27,13 +27,17 @@ export default function CopyToClipboard({ text }) {
 
   return (
     <>
-      <Button
-        variant="copy"
-        onClick={handleCopyClick}
-        ariaLabel={`Copy ${text} to clipboard`}
-      >
-        {copied ? "Successfully copied!" : "Copy"}
-      </Button>
+      {copied ? (
+        <div className="copy-confirmation">Copied to clipboard!</div>
+      ) : (
+        <Button
+          variant="copy"
+          onClick={handleCopyClick}
+          ariaLabel={`Copy ${text} to clipboard`}
+        >
+          Copy
+        </Button>
+      )}
     </>
   );
 }
