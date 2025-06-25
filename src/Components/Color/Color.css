@@ -10,11 +10,26 @@
   color: white;
 }
 
+.color-card__hex-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .color-card__actions {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.color-card__button {
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .color-card__cancel-button {
@@ -49,18 +64,4 @@
 .color-card__edit-button:hover {
   background-color: rgba(0, 123, 255, 0.9);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 85, 170, 0.8);
-}
-
-
-
-
-
-
-.color-card__button {
-  padding: 0.25rem 0.5rem;
-  cursor: pointer;
-  border-radius: 0.3rem;
-  border: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
