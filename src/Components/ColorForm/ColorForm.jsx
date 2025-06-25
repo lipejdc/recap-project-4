@@ -2,6 +2,7 @@ import "./ColorForm.css";
 import Button from "../Button/Button";
 import ColorInput from "../ColorInput/ColorInput";
 
+
 const defaultFormValues = {
   role: "some color",
   hex: "#123456",
@@ -9,6 +10,7 @@ const defaultFormValues = {
 };
 
 export default function ColorForm({ onAddColor, defaultValues = defaultFormValues, onSave, isEditing }) {
+  
   const handleSubmitColor = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);

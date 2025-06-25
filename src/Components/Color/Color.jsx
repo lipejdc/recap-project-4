@@ -1,12 +1,14 @@
 import "./Color.css";
+import fetchContrast from "../../utils/contrastCheck"
 import ColorForm from "../ColorForm/ColorForm";
 import Button from "../Button/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [contrastResult, setContrastResult] = useState(null);
 
   const handleDeleteClick = () =>
     confirmDelete ? onDeleteColor(color.id) : setConfirmDelete(true);
@@ -19,6 +21,15 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
     onEditColor({ ...color, ...updatedColor });
     setIsEditing(false);
   };
+
+  useEffect(() => {
+    async function checkContrast() {
+      const result = await fetchContrast(color.hex, color.contrastText);
+      setContrastResult(result);
+    }
+
+    checkContrast();
+  }, [color.hex, color.contrastText]);
 
   return (
     <div
@@ -34,6 +45,11 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       </div>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      {contrastResult && (
+        <p>
+          overall contrast score: <strong>{contrastResult.overall}</strong>
+        </p>
+      )}
 
       {isEditing && (
         <ColorForm defaultValues={color} onSave={handleSave} isEditing />
