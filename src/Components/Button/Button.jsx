@@ -1,4 +1,4 @@
-//Variant pattern: A way to define multiple visual or behavioral variations of a component using a single variant prop
+//Variant pattern: A way to define multiple visual or behavioral variations of a component using a single variant prop 
 
 // Define styling variants and map them to their corresponding class names
 const BUTTON_VARIANTS = {
