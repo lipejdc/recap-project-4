@@ -1,4 +1,5 @@
 import "./ColorForm.css";
+import Button from "../Button/Button";
 import ColorInput from "../ColorInput/ColorInput";
 
 const defaultFormValues = {
@@ -7,18 +8,18 @@ const defaultFormValues = {
   contrastText: "#ffffff",
 };
 
-export default function ColorForm({ onAddColor }) {
+export default function ColorForm({ onAddColor, defaultValues = defaultFormValues, onSave, isEditing }) {
   const handleSubmitColor = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onAddColor(data);
+
+    onSave ? onSave(data) : onAddColor(data);
   };
 
   return (
     <>
-      <h1 className="color-form__title">Theme Creator</h1>
-      <form className="color-form" onSubmit={handleSubmitColor}>
+      <form className={`color-form ${isEditing ? "color-form--edit" : ""}`} onSubmit={handleSubmitColor}>
         <div className="color-form__group">
           <label htmlFor="role" className="color-form__label">
             Role:
@@ -28,7 +29,7 @@ export default function ColorForm({ onAddColor }) {
             id="role"
             className="color-form__role-input"
             name="role"
-            defaultValue={defaultFormValues.role}
+            defaultValue={defaultValues.role}
           />
         </div>
 
@@ -37,7 +38,7 @@ export default function ColorForm({ onAddColor }) {
             Hex:
           </label>
           <div className="color-form__inline-inputs">
-            <ColorInput id="hex" defaultValue={defaultFormValues.hex} />
+            <ColorInput id="hex" defaultValue={defaultValues.hex} />
           </div>
         </div>
 
@@ -48,11 +49,11 @@ export default function ColorForm({ onAddColor }) {
           <div className="color-form__inline-inputs">
             <ColorInput
               id="contrastText"
-              defaultValue={defaultFormValues.contrastText}
+              defaultValue={defaultValues.contrastText}
             />
           </div>
         </div>
-        <button className="color-form__button">Add Color</button>
+        <Button>{onSave ? "Update Color" : "Add Color"}</Button>
       </form>
     </>
   );
