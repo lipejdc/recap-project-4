@@ -61,7 +61,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
           onClick={handleEditClick}
           ariaLabel={`Edit color ${color.role}`}
         >
-          Edit
+          {isEditing ? "Close Editing" : "Edit"}
         </Button>
       </div>
     </div>
