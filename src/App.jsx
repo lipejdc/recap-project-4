@@ -3,7 +3,7 @@ import Color from "./Components/Color/Color";
 import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 import { uid } from "uid";
-import useLocalStorageState from "use-local-storage-state";
+import useLocalStorageState from "use-local-storage-state"; 
 
 function App() {
   const [colors, setColors] = useLocalStorageState("colors", {defaultValue: initialColors});
