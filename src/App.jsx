@@ -9,9 +9,6 @@ import { useEffect } from "react";
 import ThemeSelector from "./Components/ThemeSelector/ThemeSelector";
 
 function App() {
-  // const [colors, setColors] = useLocalStorageState("colors", {
-  //   defaultValue: initialColors,
-  // });
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
@@ -41,6 +38,7 @@ function App() {
     updateMissingContrast();
   }, [selectedTheme]);
 
+  //COLOR HANDLERS
   const handleAddColor = async (colorToAdd) => {
     const contrast = await fetchContrast(
       colorToAdd.hex,
@@ -108,6 +106,7 @@ function App() {
     );
   };
 
+  //THEME HANDLERS
   const handleSelectTheme = (theme) => {
     setSelectedTheme(theme);
   };
@@ -141,8 +140,6 @@ function App() {
   const newSelectedTheme = remainingThemes[0] || initialThemes[0];
   setSelectedTheme(newSelectedTheme);
 };
-
-console.log("Themes in App.jsx:", themes);
 
   return (
     <>

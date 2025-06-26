@@ -9,14 +9,14 @@ const defaultFormValues = {
   contrastText: "#ffffff",
 };
 
-export default function ColorForm({ onAddColor, defaultValues = defaultFormValues, onSave, isEditing }) {
+export default function ColorForm({ onAddColor, defaultValues = defaultFormValues, onUpdate, isEditing }) {
   
   const handleSubmitColor = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    onSave ? onSave(data) : onAddColor(data);
+    onUpdate ? onUpdate(data) : onAddColor(data);
   };
 
   return (
@@ -56,7 +56,7 @@ export default function ColorForm({ onAddColor, defaultValues = defaultFormValue
             />
           </div>
         </div>
-        <Button>{onSave ? "Update Color" : "Add Color"}</Button>
+        <Button>{onUpdate ? "Update Color" : "Add Color"}</Button>
       </form>
     </>
   );

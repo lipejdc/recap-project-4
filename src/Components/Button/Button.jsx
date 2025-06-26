@@ -5,12 +5,13 @@ const BUTTON_VARIANTS = {
   delete: "color-card__delete-button color-card__button",
   edit: "color-card__edit-button color-card__button",
   cancel: "color-card__cancel-button color-card__button",
-  add: "color-form__add-button",
+  addColor: "color-form__add-button",
+  addTheme: "color-form__add-button",
   copy: "copy-to-clipboard__copy-button color-card__button"
 };
 
 export default function Button({
-  variant = "add",
+  variant = "addColor",
   onClick,
   children,
   ariaLabel,

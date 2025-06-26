@@ -1,3 +1,11 @@
+//TODO: 1. Align buttons on the right side of the dropdown
+//TODO: 2. Style the add button and the update button for the theme selector 
+//TODO: 3. Make the "choose a theme" text the same size as the text in the form
+//TODO: 4. Style the input text when the user clicks to edit the theme
+//TODO: 5. Add "Yes delete" and "Cancel" buttons when the user click on the delete button
+//TODO: 6. Style both buttons above. You can use the same logic as in the Color.jsx
+
+
 import "./ThemeSelector.css";
 import Button from "../Button/Button";
 import { useState } from "react";

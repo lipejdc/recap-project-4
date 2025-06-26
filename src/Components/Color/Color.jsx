@@ -8,6 +8,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+
   const handleDeleteClick = () =>
     confirmDelete ? onDeleteColor(color.id) : setConfirmDelete(true);
 
@@ -15,7 +16,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
 
   const handleEditClick = () => setIsEditing((editing) => !editing);
 
-  const handleSave = (updatedColor) => {
+  const handleUpdate = (updatedColor) => {
     //Get original color properties (with id) and update them with the new ones. Id stays the same.
     onEditColor({ ...color, ...updatedColor });
     setIsEditing(false);
@@ -44,7 +45,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       )}
 
       {isEditing && (
-        <ColorForm defaultValues={color} onSave={handleSave} isEditing />
+        <ColorForm defaultValues={color} onUpdate={handleUpdate} isEditing />
       )}
 
       <div className="color-card__actions">
