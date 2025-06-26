@@ -34,6 +34,13 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       </div>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
+      {color.contrastResult && (
+        <p
+          className={`contrast-result contrast-${color.contrastResult.toLowerCase()}`}
+        >
+          Overall Contrast Score: <strong>{color.contrastResult}</strong>
+        </p>
+      )}
 
       {isEditing && (
         <ColorForm defaultValues={color} onSave={handleSave} isEditing />

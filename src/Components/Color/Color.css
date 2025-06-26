@@ -65,3 +65,26 @@
   background-color: rgba(0, 123, 255, 0.9);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 85, 170, 0.8);
 }
+
+.contrast-result {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  display: inline-block;
+}
+
+.contrast-yup {
+  background-color: #b4f8c8;
+  color: #000;
+}
+
+.contrast-kinda {
+  background-color: #ffe7a0;
+  color: #000;
+}
+
+.contrast-nope {
+  background-color: #ffadad;
+  color: #000;
+}
