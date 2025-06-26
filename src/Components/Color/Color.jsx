@@ -16,6 +16,7 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
   const handleEditClick = () => setIsEditing((editing) => !editing);
 
   const handleSave = (updatedColor) => {
+    //Get original color properties (with id) and update them with the new ones. Id stays the same.
     onEditColor({ ...color, ...updatedColor });
     setIsEditing(false);
   };

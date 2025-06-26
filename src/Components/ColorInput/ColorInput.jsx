@@ -14,12 +14,14 @@ export default function ColorInput({ id, defaultValue }) {
         value={colorValue}
         onChange={handleColorChange}
         className="color-input__text"
+        required
       />
       <input
         type="color"
         value={colorValue}
         onChange={handleColorChange}
         className="color-input__color"
+        required
       />
     </>
   );
