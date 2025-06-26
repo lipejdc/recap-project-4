@@ -7,7 +7,7 @@ const BUTTON_VARIANTS = {
   cancel: "color-card__cancel-button color-card__button",
   add: "color-form__add-button",
   copy: "copy-to-clipboard__copy-button color-card__button"
-}; 
+};
 
 export default function Button({
   variant = "add",

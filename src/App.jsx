@@ -12,26 +12,26 @@ function App() {
     defaultValue: initialColors,
   });
 
-// On initial load, fetch contrastResult for all colors and add it to each object
-//   useEffect(() => {
-//   async function updateMissingContrast() {
-//     const updatedColors = await Promise.all(
-//       colors.map(async (color) => {
-//         if (!color.contrastResult) {
-//           const contrast = await fetchContrast(color.hex, color.contrastText);
-//           return {
-//             ...color,
-//             contrastResult: contrast?.overall ?? "Unknown",
-//           };
-//         }
-//         return color;
-//       })
-//     );
-//     setColors(updatedColors);
-//   }
+  // On initial load, fetch contrastResult for all colors and add it to each object
+  //   useEffect(() => {
+  //   async function updateMissingContrast() {
+  //     const updatedColors = await Promise.all(
+  //       colors.map(async (color) => {
+  //         if (!color.contrastResult) {
+  //           const contrast = await fetchContrast(color.hex, color.contrastText);
+  //           return {
+  //             ...color,
+  //             contrastResult: contrast?.overall ?? "Unknown",
+  //           };
+  //         }
+  //         return color;
+  //       })
+  //     );
+  //     setColors(updatedColors);
+  //   }
 
-//   updateMissingContrast();
-// }, []);
+  //   updateMissingContrast();
+  // }, []);
 
   const handleAddColor = async (colorToAdd) => {
     const contrast = await fetchContrast(
@@ -64,7 +64,7 @@ function App() {
     );
 
     setColors((prevColors) =>
-       //We update only the color with the matching ID of updatedColor.id, leave others unchanged
+      //We update only the color with the matching ID of updatedColor.id, leave others unchanged
       prevColors.map((color) =>
         color.id === updatedColor.id
           ? //contrast.overall stores the result of the comparison. If it is null or undefined, return "Unknown"
@@ -82,16 +82,14 @@ function App() {
       {colors.length === 0 && (
         <p className="app__empty-message">No colors.. start by adding one!</p>
       )}
-      {colors.map((color) => {
-        return (
-          <Color
-            key={color.id}
-            color={color}
-            onDeleteColor={handleDeleteColor}
-            onEditColor={handleEditColor}
-          />
-        );
-      })}
+      {colors.map((color) => (
+        <Color
+          key={color.id}
+          color={color}
+          onDeleteColor={handleDeleteColor}
+          onEditColor={handleEditColor}
+        />
+      ))}
     </>
   );
 }
