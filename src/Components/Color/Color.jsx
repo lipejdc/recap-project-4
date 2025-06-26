@@ -32,8 +32,8 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         <h3 className="color-card__highlight">{color.hex}</h3>
         <CopyToClipboard text={color.hex} />
       </div>
-      <h4>{color.role}</h4>
-      <p>contrast: {color.contrastText}</p>
+      <h4 className="color-card__role">{color.role}</h4>
+      <p className="color-card__contrast">contrast: {color.contrastText}</p>
       {color.contrastResult && (
         <p
           className={`contrast-result contrast-${color.contrastResult.toLowerCase()}`}

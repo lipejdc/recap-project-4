@@ -1,6 +1,12 @@
 .color-card {
-  margin: 0px 10px;
-  padding: 5px;
+  width: 25rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
 }
 
 .color-card__highlight {
@@ -43,7 +49,6 @@
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.3);
 }
 
-
 .color-card__delete-button {
   background-color: rgba(255, 0, 0, 0.7);
   color: white;
@@ -72,6 +77,7 @@
   font-weight: bold;
   margin: 0.5rem 0;
   display: inline-block;
+  width: fit-content;
 }
 
 .contrast-yup {
@@ -87,4 +93,8 @@
 .contrast-nope {
   background-color: #ffadad;
   color: #000;
+}
+
+.color-card__contrast, .color-card__role {
+  font-size: 1.2rem;
 }

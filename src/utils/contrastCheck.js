@@ -1,6 +1,6 @@
 export default async function fetchContrast(backgroundColor, textColor) {
   try {
-    const response = await fetch("/api/contrast", {
+    const response = await fetch("https://www.aremycolorsaccessible.com/api/are-they", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ colors: [backgroundColor, textColor] }),

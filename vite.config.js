@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-// export default defineConfig({
-//   plugins: [react()],
-// })
+export default defineConfig({
+  plugins: [react()],
+})
 
 /*
 How does a proxy help?
@@ -23,18 +23,18 @@ Why do you need it?
 */
 
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    proxy: {
-      '/api/contrast': {
-        target: 'https://www.aremycolorsaccessible.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/contrast/, '/api/are-they'),
-      },
-    },
-  },
-})
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     proxy: {
+//       '/api/contrast': {
+//         target: 'https://www.aremycolorsaccessible.com',
+//         changeOrigin: true,
+//         rewrite: (path) => path.replace(/^\/api\/contrast/, '/api/are-they'),
+//       },
+//     },
+//   },
+// })
 
 /*Cross-origin request: webpage (or app) tries to get data from a different origin than the one it was loaded from.
 Your React app running at http://localhost:5173 tries to fetch from https://aremycolorsaccessible.com
@@ -54,6 +54,58 @@ This is to protect users from malicious websites sneaking data or doing harmful 
 
 
 /*
+// utils/contrastCheck.js
+export async function fetchContrast(bcolor, fcolor) {
+  try {
+    const response = await fetch("https://aremycolorsaccessible.com/api", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bcolor, fcolor }),
+    });
+
+    if (!response.ok) throw new Error("API error");
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Contrast check failed", err);
+    return null;
+  }
+}
+
+
+
+import { useEffect } from "react";
+import { fetchContrast } from "./utils/contrastCheck";
+
+function App() {
+  // 👇 test call inside useEffect
+  useEffect(() => {
+    async function testContrast() {
+      const result = await fetchContrast("#ff4a11", "#ffffff");
+      console.log("Contrast API result:", result);
+    }
+
+    testContrast();
+  }, []);
+
+  // ...rest of your component
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 localhost/:1 Access to fetch at 'https://aremycolorsaccessible.com/api' from origin 'http://localhost:5173' has been blocked by CORS policy: 
 Response to preflight request doesn't pass access control check: Redirect is not allowed for a preflight request.Understand this error
 contrastCheck.js:3 

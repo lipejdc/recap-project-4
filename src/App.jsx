@@ -5,33 +5,33 @@ import ColorForm from "./Components/ColorForm/ColorForm";
 import "./App.css";
 import { uid } from "uid";
 import useLocalStorageState from "use-local-storage-state";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
 function App() {
   const [colors, setColors] = useLocalStorageState("colors", {
     defaultValue: initialColors,
   });
 
-  // On initial load, fetch contrastResult for all colors and add it to each object
-  //   useEffect(() => {
-  //   async function updateMissingContrast() {
-  //     const updatedColors = await Promise.all(
-  //       colors.map(async (color) => {
-  //         if (!color.contrastResult) {
-  //           const contrast = await fetchContrast(color.hex, color.contrastText);
-  //           return {
-  //             ...color,
-  //             contrastResult: contrast?.overall ?? "Unknown",
-  //           };
-  //         }
-  //         return color;
-  //       })
-  //     );
-  //     setColors(updatedColors);
-  //   }
+  //On initial load, fetch contrastResult for all colors and add it to each object
+    useEffect(() => {
+    async function updateMissingContrast() {
+      const updatedColors = await Promise.all(
+        colors.map(async (color) => {
+          if (!color.contrastResult) {
+            const contrast = await fetchContrast(color.hex, color.contrastText);
+            return {
+              ...color,
+              contrastResult: contrast?.overall ?? "Unknown",
+            };
+          }
+          return color;
+        })
+      );
+      setColors(updatedColors);
+    }
 
-  //   updateMissingContrast();
-  // }, []);
+    updateMissingContrast();
+  }, []);
 
   const handleAddColor = async (colorToAdd) => {
     const contrast = await fetchContrast(
@@ -82,14 +82,16 @@ function App() {
       {colors.length === 0 && (
         <p className="app__empty-message">No colors.. start by adding one!</p>
       )}
-      {colors.map((color) => (
-        <Color
-          key={color.id}
-          color={color}
-          onDeleteColor={handleDeleteColor}
-          onEditColor={handleEditColor}
-        />
-      ))}
+      <div className="app__color-container">
+        {colors.map((color) => (
+          <Color
+            key={color.id}
+            color={color}
+            onDeleteColor={handleDeleteColor}
+            onEditColor={handleEditColor}
+          />
+        ))}
+      </div>
     </>
   );
 }
