@@ -32,6 +32,7 @@ export default function ColorForm({ onAddColor, defaultValues = defaultFormValue
             className="color-form__role-input"
             name="role"
             defaultValue={defaultValues.role}
+            required
           />
         </div>
 
