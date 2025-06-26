@@ -1,6 +1,7 @@
 body {
   font-family: "Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   padding: 10px;
+  background-color: #e9ecf1;
 }
 
 .app__title {
