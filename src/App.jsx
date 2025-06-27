@@ -20,6 +20,7 @@ function App() {
   );
 
   //Runs only on initial load or when theme changes
+
   useEffect(() => {
     async function updateMissingContrast() {
       //Promise.all run all fetches in parallel
@@ -44,7 +45,10 @@ function App() {
     }
 
     updateMissingContrast();
-  }, [selectedTheme]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTheme]); 
+
+
 
   //COLOR HANDLERS
   const handleAddColor = async (colorToAdd) => {

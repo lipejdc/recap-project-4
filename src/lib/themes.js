@@ -7,4 +7,9 @@ export const initialThemes = [
     name: "Default Theme",
     colors: [...initialColors],
   },
+  {
+    id: "t2",
+    name: "First Theme",
+    colors: [],
+  },
 ];

@@ -42,7 +42,7 @@ export default function ThemeSelector({
   };
 
   const handleUpdateClick = () => {
-     // Update theme name if input is not empty, then exit edit mode
+     //Update theme name if input is not empty, then exit edit mode
     if (inputValue.trim()) {
       onEditTheme({ ...selectedTheme, name: inputValue.trim() });
       setIsEditing(false);
