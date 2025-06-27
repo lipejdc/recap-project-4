@@ -6,7 +6,7 @@ const BUTTON_VARIANTS = {
   edit: "color-card__edit-button color-card__button",
   cancel: "color-card__cancel-button color-card__button",
   addColor: "color-form__add-button",
-  addTheme: "color-form__add-button",
+  addTheme: "color-card__add-theme-button color-card__button",
   copy: "copy-to-clipboard__copy-button color-card__button"
 };
 

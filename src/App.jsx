@@ -9,12 +9,14 @@ import { useEffect } from "react";
 import ThemeSelector from "./Components/ThemeSelector/ThemeSelector";
 
 function App() {
+  //Finds and returns the default theme if it is not null or undefined, otherwise the index 0 of themes.
+  const defaultTheme = initialThemes.find(theme => theme.name === "Default Theme") ?? initialThemes[0];
   const [themes, setThemes] = useLocalStorageState("themes", {
     defaultValue: initialThemes,
   });
   const [selectedTheme, setSelectedTheme] = useLocalStorageState(
     "selectedTheme",
-    { defaultValue: initialThemes[0] }
+    { defaultValue: defaultTheme }
   );
 
   //On initial load, fetch contrastResult for all colors and add it to each object

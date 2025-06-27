@@ -1,11 +1,3 @@
-//TODO: 1. Align buttons on the right side of the dropdown
-//TODO: 2. Style the add button and the update button for the theme selector 
-//TODO: 3. Make the "choose a theme" text the same size as the text in the form
-//TODO: 4. Style the input text when the user clicks to edit the theme
-//TODO: 5. Add "Yes delete" and "Cancel" buttons when the user click on the delete button
-//TODO: 6. Style both buttons above. You can use the same logic as in the Color.jsx
-
-
 import "./ThemeSelector.css";
 import Button from "../Button/Button";
 import { useState } from "react";
@@ -30,7 +22,7 @@ export default function ThemeSelector({
 
   const handleDeleteClick = () => {
     confirmDelete ? onDeleteTheme(selectedTheme.id) : setConfirmDelete(true);
-  }
+  };
 
   const handleStartEdit = () => {
     setInputValue(selectedTheme.name);
@@ -69,39 +61,65 @@ export default function ThemeSelector({
       {/* If user is not adding nor editing, display dropdown */}
       {!isEditing && !isAdding ? (
         <>
-          <label htmlFor="theme-select">Choose a theme:</label>
-          <select
-            id="theme-select"
-            value={selectedTheme.id}
-            onChange={handleThemeChange}
-          >
-            {themes.map((theme) => (
-              <option key={theme.id} value={theme.id}>
-                {theme.name}
-              </option>
-            ))}
-          </select>
+          <div className="theme-selector__dropdown-group">
+            <label htmlFor="theme-select" className="theme-selector__label">
+              Choose a theme:
+            </label>
+            <select
+              id="theme-select"
+              value={selectedTheme.id}
+              onChange={handleThemeChange}
+            >
+              {themes.map((theme) => (
+                <option key={theme.id} value={theme.id}>
+                  {theme.name}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <Button onClick={handleAdd}>Add</Button>
+          <Button
+            variant="addTheme"
+            onClick={handleAdd}
+            ariaLabel="Add a new theme"
+          >
+            Add
+          </Button>
 
           {/* Only display edit and delete button if default theme is NOT selected! */}
           {selectedTheme.name !== "Default Theme" && (
             <>
-              <Button variant="edit" onClick={handleStartEdit}>
+              <Button
+                variant="edit"
+                onClick={handleStartEdit}
+                ariaLabel={`Edit theme ${selectedTheme.name}`}
+              >
                 Edit
               </Button>
 
               {/* Delete confirmation buttons */}
               {!confirmDelete ? (
-                <Button variant="delete" onClick={handleDeleteClick}>
+                <Button
+                  variant="delete"
+                  onClick={handleDeleteClick}
+                  ariaLabel={`Delete theme ${selectedTheme.name}`}
+                >
                   Delete
                 </Button>
               ) : (
                 <>
-                  <Button variant="delete" onClick={handleDeleteClick}>
+                  <Button
+                    variant="delete"
+                    onClick={handleDeleteClick}
+                    ariaLabel={`Confirm deletion of theme ${selectedTheme.name}`}
+                  >
                     Yes, delete
                   </Button>
-                  <Button variant="cancel" onClick={handleCancel}>
+                  <Button
+                    variant="cancel"
+                    onClick={handleCancel}
+                    ariaLabel={`Cancel delete of theme ${selectedTheme.name}`}
+                  >
                     Cancel
                   </Button>
                 </>
@@ -109,8 +127,8 @@ export default function ThemeSelector({
             </>
           )}
         </>
-      //If user is adding or adding display a form with an input text field
       ) : (
+        //If user is adding or adding display a form with an input text field
         <form
           onSubmit={(event) => {
             event.preventDefault();
@@ -119,18 +137,22 @@ export default function ThemeSelector({
             isEditing ? handleUpdate() : handleAddSubmit();
           }}
         >
-          <label htmlFor="theme-name">
-            {isEditing ? "Rename Theme:" : "New Theme Name:"}
-          </label>
-          <input
-            id="theme-name"
-            type="text"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-            required
-          />
-          <Button type="submit" variant={isEditing ? "update" : "add"}>
-            {isEditing ? "Update" : "Add Theme"}
+          <div className="theme-selector__input-group">
+            <label htmlFor="theme-name" className="theme-selector__label">
+              {isEditing ? "Rename Theme:" : "New Theme Name:"}
+            </label>
+            <input
+              id="theme-name"
+              type="text"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+              required
+              className="theme-selector__input"
+            />
+          </div>
+
+          <Button type="submit" variant={isEditing ? "edit" : "addTheme"}>
+            {isEditing ? "Update Theme" : "Add Theme"}
           </Button>
           <Button variant="cancel" onClick={handleCancel}>
             Cancel
