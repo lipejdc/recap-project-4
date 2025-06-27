@@ -15,8 +15,11 @@ export default function ThemeSelector({
   const [inputValue, setInputValue] = useState("");
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const handleThemeChange = (e) => {
-    const selected = themes.find((t) => t.id === e.target.value);
+  //HANDLE FUNCTIONS
+  const handleThemeChange = (event) => {
+    //When user selects a theme from the dropdown, find the theme by its id
+    const selected = themes.find((theme) => theme.id === event.target.value);
+    //If found, call onSelectTheme to update the selected theme
     if (selected) onSelectTheme(selected);
   };
 
@@ -24,33 +27,39 @@ export default function ThemeSelector({
     confirmDelete ? onDeleteTheme(selectedTheme.id) : setConfirmDelete(true);
   };
 
-  const handleStartEdit = () => {
+  const handleEditClick = () => {
+    //Set input value to the current theme name
     setInputValue(selectedTheme.name);
     setIsEditing(true);
   };
 
-  const handleCancel = () => {
+  const handleCancelClick = () => {
+    //Cancel any edit/add/delete states
     setIsEditing(false);
     setIsAdding(false);
     setConfirmDelete(false);
     setInputValue("");
   };
 
-  const handleUpdate = () => {
+  const handleUpdateClick = () => {
+     // Update theme name if input is not empty, then exit edit mode
     if (inputValue.trim()) {
       onEditTheme({ ...selectedTheme, name: inputValue.trim() });
       setIsEditing(false);
     }
   };
 
-  const handleAdd = () => {
+  const handleAddClick = () => {
+    //Turn add mode on with empty input
     setIsAdding(true);
     setInputValue("");
   };
 
   const handleAddSubmit = () => {
+    //If input is not empty, adds a new theme
     if (inputValue.trim()) {
-      onAddTheme(inputValue.trim()); // now passes name to App
+      onAddTheme(inputValue.trim());
+      //Turn off add mode, clear input and reset any delete confirmation
       setIsAdding(false);
       setInputValue("");
       setConfirmDelete(false);
@@ -81,7 +90,7 @@ export default function ThemeSelector({
 
           <Button
             variant="addTheme"
-            onClick={handleAdd}
+            onClick={handleAddClick}
             ariaLabel="Add a new theme"
           >
             Add
@@ -92,7 +101,7 @@ export default function ThemeSelector({
             <>
               <Button
                 variant="edit"
-                onClick={handleStartEdit}
+                onClick={handleEditClick}
                 ariaLabel={`Edit theme ${selectedTheme.name}`}
               >
                 Edit
@@ -118,7 +127,7 @@ export default function ThemeSelector({
                   </Button>
                   <Button
                     variant="cancel"
-                    onClick={handleCancel}
+                    onClick={handleCancelClick}
                     ariaLabel={`Cancel delete of theme ${selectedTheme.name}`}
                   >
                     Cancel
@@ -134,8 +143,8 @@ export default function ThemeSelector({
           onSubmit={(event) => {
             event.preventDefault();
             //If user is editing, call handleUpdate and update theme name
-            //If user is not editing, call handleAddSubmit and add new theme
-            isEditing ? handleUpdate() : handleAddSubmit();
+            //If user is not editing, he's obviously adding.. so, call handleAddSubmit to add new theme
+            isEditing ? handleUpdateClick() : handleAddSubmit();
           }}
         >
           <div className="theme-selector__input-group">
@@ -155,7 +164,7 @@ export default function ThemeSelector({
           <Button type="submit" variant={isEditing ? "edit" : "addTheme"}>
             {isEditing ? "Update Theme" : "Add Theme"}
           </Button>
-          <Button variant="cancel" onClick={handleCancel}>
+          <Button variant="cancel" onClick={handleCancelClick}>
             Cancel
           </Button>
         </form>

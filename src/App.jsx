@@ -19,21 +19,27 @@ function App() {
     { defaultValue: defaultTheme }
   );
 
-  //On initial load, fetch contrastResult for all colors and add it to each object
+  //Runs only on initial load or when theme changes
   useEffect(() => {
     async function updateMissingContrast() {
+      //Promise.all run all fetches in parallel
       const updatedColors = await Promise.all(
+        //Goes through every color in the theme
         selectedTheme.colors.map(async (color) => {
+          //If color doesn't have contrastResult, fetch in the API
           if (!color.contrastResult) {
             const contrast = await fetchContrast(color.hex, color.contrastText);
             return {
+              //Keep all object properties and add contrastResult
               ...color,
               contrastResult: contrast?.overall ?? "Unknown",
             };
           }
+          //If color already has contrastResult, return unchanged
           return color;
         })
       );
+      //Copy properties of theme and replace colors with updated ones
       setSelectedTheme({ ...selectedTheme, colors: updatedColors });
     }
 
@@ -51,16 +57,17 @@ function App() {
       //Add new object with id and contrastResult to the start of the colors array , then the rest of the colors
       id: uid(),
       ...colorToAdd,
-      //contrast.overall stores the result of the comparison. If it is null or undefined, return "Unknown"
       contrastResult: contrast?.overall ?? "Unknown",
     };
-    //Update the selected theme with the new color added
+    //Create updated theme with the new color added at the beginning of the colors array
     const updatedSelectedTheme = {
       ...selectedTheme,
       colors: [newColor, ...selectedTheme.colors],
     };
+    //Save updated theme with the new color
     setSelectedTheme(updatedSelectedTheme);
 
+    //Replace the updated theme in the themes array, keep others unchanged
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === updatedSelectedTheme.id ? updatedSelectedTheme : theme
@@ -69,15 +76,16 @@ function App() {
   };
 
   const handleDeleteColor = (idToDelete) => {
-    // Get all properties from the selected theme and remove the color that matches the id provided
+    //Create a new theme with all colors except the one with the matching ID
     const updatedSelectedTheme = {
       ...selectedTheme,
       colors: selectedTheme.colors.filter((color) => color.id !== idToDelete),
     };
 
-    // Update the selected theme state
+    //Save updated theme without the new color
     setSelectedTheme(updatedSelectedTheme);
-
+    
+    //Remove the deleted theme from the themes array
     setThemes((prevThemes) =>
       prevThemes.filter((theme) => theme.id !== updatedSelectedTheme.id)
     );
@@ -88,19 +96,22 @@ function App() {
       updatedColor.hex,
       updatedColor.contrastText
     );
-
+    //Replace the edited color in the colors array with the updated values and new contrast result
     const updatedColors = selectedTheme.colors.map((color) =>
       color.id === updatedColor.id
         ? { ...updatedColor, contrastResult: contrast?.overall ?? "Unknown" }
         : color
     );
 
+    //Create a new selectedTheme object with the updated colors
     const updatedSelectedTheme = {
       ...selectedTheme,
       colors: updatedColors,
     };
+    //Save updated theme with the updated color
     setSelectedTheme(updatedSelectedTheme);
 
+    //Replace the edited theme in the themes array with the updated version
     setThemes((prevThemes) =>
       prevThemes.map((theme) =>
         theme.id === updatedSelectedTheme.id ? updatedSelectedTheme : theme
@@ -110,6 +121,7 @@ function App() {
 
   //THEME HANDLERS
   const handleSelectTheme = (theme) => {
+    //Set the selected theme to the one the user chooses
     setSelectedTheme(theme);
   };
 
@@ -119,15 +131,19 @@ function App() {
     name: themeName,
     colors: [],
   };
-
+  //Add new theme to the themes array
   setThemes((prev) => [...prev, newTheme]);
+
+  //Set the new theme as the currently selected theme
   setSelectedTheme(newTheme);
 };
 
   const handleEditTheme = (updatedTheme) => {
+    //Replace the theme with the same ID with the updated theme
     setThemes((prev) =>
       prev.map((theme) => (theme.id === updatedTheme.id ? updatedTheme : theme))
     );
+    //Set the updated theme as the currently selected theme
     setSelectedTheme(updatedTheme);
   };
 
@@ -135,11 +151,16 @@ function App() {
   //Prevent deleting the Default Theme
   if (selectedTheme.name === "Default Theme") return;
 
+  //Create a new array without the theme to delete
   const remainingThemes = themes.filter((theme) => theme.id !== themeId);
+  
+  //Update the themes state with the filtered list
   setThemes(remainingThemes);
 
-  //Fallback: select the first remaining theme or default to the first initial theme
+  //Select the first remaining theme, or use first default theme
   const newSelectedTheme = remainingThemes[0] || initialThemes[0];
+
+  //Set the new selected theme
   setSelectedTheme(newSelectedTheme);
 };
 

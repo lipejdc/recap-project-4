@@ -7,21 +7,21 @@ export default function CopyToClipboard({ text }) {
 
   const handleCopyClick = async () => {
     try {
-      //Function execution pauses at the await while the rest of component renders
+      //Function execution pauses at the await until the text is copied to the clipboard
       await navigator.clipboard.writeText(text);
-      //The rest only runs once the promise resolves
+      //Successful copy? Update state to true
       setCopied(true);
-    } catch (err) {
-      console.error("Failed to copy", err);
+    } catch (error) {
+      console.error("Failed to copy", error);
     }
   };
 
   useEffect(() => {
     //If nothing is copied, do nothing (escape useEffect)
     if (!copied) return;
-    //Set "copied" state to true and reset to "false" after 3 seconds
+    //Copied true? Set timer and reset it back to false in 3 seconds
     const timer = setTimeout(() => setCopied(false), 3000);
-    //Clean up function => Cancel the timeout if "copied" changes or the component unmounts
+    //Clean up function: Cancel the timeout if "copied" changes or the component unmounts
     return () => clearTimeout(timer);
   }, [copied]);
 
