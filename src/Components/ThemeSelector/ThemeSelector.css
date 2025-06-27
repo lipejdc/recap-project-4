@@ -1,28 +1,53 @@
 .theme-selector {
   margin-bottom: 1rem;
   display: flex;
-  flex-direction: column; /* Stack label, dropdown, buttons vertically */
-  align-items: center; /* Center horizontally */
-  gap: 0.5rem;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.theme-selector label {
-  font-weight: bold;
+.theme-selector__dropdown-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 16ch;
+}
+
+.theme-selector__label {
+  font-weight: 600;
+  font-size: 1.1rem;
   margin-bottom: 0.25rem;
 }
 
+.theme-selector__input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border: 0.0625rem solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.theme-selector__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .theme-selector select {
-  min-width: 200px; /* Enough space to show full theme names */
   padding: 0.4rem;
   font-size: 1rem;
   border-radius: 0.3rem;
   border: 1px solid #ccc;
+  min-width: 14em;
 }
 
 .theme-selector form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-end;
   gap: 0.5rem;
 }
 
@@ -66,4 +91,20 @@
 .color-card__edit-button:hover {
   background-color: rgba(0, 123, 255, 0.9);
   box-shadow: 0 0.25rem 0.5rem rgba(0, 85, 170, 0.8);
+}
+
+.color-card__add-theme-button {
+  background-color: rgba(40, 167, 69, 0.7); /* green tone */
+  color: white;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 100, 50, 0.6);
+}
+
+.color-card__add-theme-button:hover {
+  background-color: rgba(40, 167, 69, 0.9);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 100, 50, 0.8);
+}
+
+.theme-selector form input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
 }

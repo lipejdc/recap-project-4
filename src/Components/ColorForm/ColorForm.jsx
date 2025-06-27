@@ -13,9 +13,11 @@ export default function ColorForm({ onAddColor, defaultValues = defaultFormValue
   
   const handleSubmitColor = (event) => {
     event.preventDefault();
+    //This collects all form input values in an object
     const formData = new FormData(event.target);
+    //Convert the data into key-value pairs
     const data = Object.fromEntries(formData);
-
+    //Are we editing? Call onUpdate, otherwise call onAddColor
     onUpdate ? onUpdate(data) : onAddColor(data);
   };
 
