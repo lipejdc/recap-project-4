@@ -21,11 +21,16 @@ export default function ThemeSelector({
   const [isEditing, setIsEditing] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleThemeChange = (e) => {
     const selected = themes.find((t) => t.id === e.target.value);
     if (selected) onSelectTheme(selected);
   };
+
+  const handleDeleteClick = () => {
+    confirmDelete ? onDeleteTheme(selectedTheme.id) : setConfirmDelete(true);
+  }
 
   const handleStartEdit = () => {
     setInputValue(selectedTheme.name);
@@ -35,6 +40,7 @@ export default function ThemeSelector({
   const handleCancel = () => {
     setIsEditing(false);
     setIsAdding(false);
+    setConfirmDelete(false);
     setInputValue("");
   };
 
@@ -60,6 +66,7 @@ export default function ThemeSelector({
 
   return (
     <div className="theme-selector">
+      {/* If user is not adding nor editing, display dropdown */}
       {!isEditing && !isAdding ? (
         <>
           <label htmlFor="theme-select">Choose a theme:</label>
@@ -77,24 +84,38 @@ export default function ThemeSelector({
 
           <Button onClick={handleAdd}>Add</Button>
 
+          {/* Only display edit and delete button if default theme is NOT selected! */}
           {selectedTheme.name !== "Default Theme" && (
             <>
               <Button variant="edit" onClick={handleStartEdit}>
                 Edit
               </Button>
-              <Button
-                variant="delete"
-                onClick={() => onDeleteTheme(selectedTheme.id)}
-              >
-                Delete
-              </Button>
+
+              {/* Delete confirmation buttons */}
+              {!confirmDelete ? (
+                <Button variant="delete" onClick={handleDeleteClick}>
+                  Delete
+                </Button>
+              ) : (
+                <>
+                  <Button variant="delete" onClick={handleDeleteClick}>
+                    Yes, delete
+                  </Button>
+                  <Button variant="cancel" onClick={handleCancel}>
+                    Cancel
+                  </Button>
+                </>
+              )}
             </>
           )}
         </>
+      //If user is adding or adding display a form with an input text field
       ) : (
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
+          onSubmit={(event) => {
+            event.preventDefault();
+            //If user is editing, call handleUpdate and update theme name
+            //If user is not editing, call handleAddSubmit and add new theme
             isEditing ? handleUpdate() : handleAddSubmit();
           }}
         >
@@ -105,7 +126,7 @@ export default function ThemeSelector({
             id="theme-name"
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(event) => setInputValue(event.target.value)}
             required
           />
           <Button type="submit" variant={isEditing ? "update" : "add"}>

@@ -130,13 +130,13 @@ function App() {
   };
 
   const handleDeleteTheme = (themeId) => {
-  // Prevent deleting the Default Theme
+  //Prevent deleting the Default Theme
   if (selectedTheme.name === "Default Theme") return;
 
-  const remainingThemes = themes.filter((t) => t.id !== themeId);
+  const remainingThemes = themes.filter((theme) => theme.id !== themeId);
   setThemes(remainingThemes);
 
-  // Fallback: select the first remaining theme or default to the first initial theme
+  //Fallback: select the first remaining theme or default to the first initial theme
   const newSelectedTheme = remainingThemes[0] || initialThemes[0];
   setSelectedTheme(newSelectedTheme);
 };
