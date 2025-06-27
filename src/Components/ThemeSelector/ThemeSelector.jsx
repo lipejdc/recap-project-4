@@ -53,6 +53,7 @@ export default function ThemeSelector({
       onAddTheme(inputValue.trim()); // now passes name to App
       setIsAdding(false);
       setInputValue("");
+      setConfirmDelete(false);
     }
   };
 
